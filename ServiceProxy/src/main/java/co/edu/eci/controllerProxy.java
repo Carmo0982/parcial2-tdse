@@ -18,8 +18,8 @@ public class controllerProxy {
     private final String primaryServer = System.getenv("PRIMARY_URL");
     private final String secondaryServer = System.getenv("SECONDARY_URL");
 
-    private String requestToServer(String serverUrl, String endpoint, String value) throws IOException {
-        String UrlComplete = serverUrl + endpoint + "?value=" + value;
+    private String requestToServer(String serverUrl, String endpoint, String list, String value) throws IOException {
+        String UrlComplete = serverUrl + endpoint + "?list=" + list + "&value=" + value;
         URL obj = new URL(UrlComplete);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -48,10 +48,10 @@ public class controllerProxy {
         }
     }
 
-    private String activePassive(String endpoint, String value) {
+    private String activePassive(String endpoint, String list, String value) {
         System.out.println("Intentando con servidor primario...");
         try {
-            String result = requestToServer(primaryServer, endpoint, value);
+            String result = requestToServer(primaryServer, endpoint, list, value);
             if (result != null) {
                 return "Respuesta servidor primario: " + result;
             }
@@ -61,7 +61,7 @@ public class controllerProxy {
 
         System.out.println("Intentando con servidor secundario...");
         try {
-            String result = requestToServer(secondaryServer, endpoint, value);
+            String result = requestToServer(secondaryServer, endpoint, list, value);
             if (result != null) {
                 return "Respuesta servidor secundario: " + result;
             }
@@ -71,6 +71,11 @@ public class controllerProxy {
 
         System.out.println("GET DONE");
         return "ambos servidores se encuentran caidos";
+    }
+
+    @GetMapping("/linearsearch")
+    public String linearSearch(@RequestParam String list, @RequestParam String value) {
+        return activePassive("/linearsearch", list, value);
     }
     
 }
