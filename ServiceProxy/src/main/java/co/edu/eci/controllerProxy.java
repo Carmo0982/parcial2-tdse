@@ -77,5 +77,10 @@ public class controllerProxy {
     public String linearSearch(@RequestParam String list, @RequestParam String value) {
         return activePassive("/linearsearch", list, value);
     }
+
+    @GetMapping("/binarysearch")
+    public String binarySearch(@RequestParam String list, @RequestParam String value) {
+        return activePassive("/binarysearch", list, value);
+    }
     
 }
