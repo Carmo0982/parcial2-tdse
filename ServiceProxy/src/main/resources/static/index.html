@@ -7,7 +7,48 @@
 </head>
 <body>
 
+    <h1>Linear Search</h1>
+    <form>
+        <label for="linearList">Lista:</label><br>
+        <input type="text" id="linearList" value="10,20,13,40,60"><br><br>
+        <label for="linearValue">Valor a buscar:</label><br>
+        <input type="text" id="linearValue" value="13"><br><br>
+        <input type="button" value="Buscar" onclick="calcularLinearSearch()">
+    </form>
+    <div id="linearResult"></div>
+
+    <h1>Binary Search</h1>
+    <form>
+        <label for="binaryList">Lista ordenada:</label><br>
+        <input type="text" id="binaryList" value="10,20,30,40,60"><br><br>
+        <label for="binaryValue">Valor a buscar:</label><br>
+        <input type="text" id="binaryValue" value="30"><br><br>
+        <input type="button" value="Buscar" onclick="calcularBinarySearch()">
+    </form>
+    <div id="binaryResult"></div>
+
     <script>
+    function calcularLinearSearch() {
+        let list = document.getElementById("linearList").value;
+        let value = document.getElementById("linearValue").value;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("linearResult").innerHTML = this.responseText;
+        }
+        xhttp.open("GET", "/linearsearch?list=" + list + "&value=" + value);
+        xhttp.send();
+    }
+
+    function calcularBinarySearch() {
+        let list = document.getElementById("binaryList").value;
+        let value = document.getElementById("binaryValue").value;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("binaryResult").innerHTML = this.responseText;
+        }
+        xhttp.open("GET", "/binarysearch?list=" + list + "&value=" + value);
+        xhttp.send();
+    }
     </script>
 
 </body>
