@@ -27,6 +27,7 @@ public class controllerProxy {
         con.setRequestProperty("User-Agent", USER_AGENT);
 
         int responseCode = con.getResponseCode();
+
         System.out.println("GET Response Code :: " + responseCode);
 
         if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -71,6 +72,7 @@ public class controllerProxy {
 
         System.out.println("GET DONE");
         return "ambos servidores se encuentran caidos";
+
     }
 
     @GetMapping("/linearsearch")
